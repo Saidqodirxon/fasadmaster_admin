@@ -23,6 +23,10 @@ import {
   Briefcase,
   Settings,
   User,
+  DollarSignIcon,
+  MenuIcon,
+  HamIcon,
+  SquareMenu,
 } from "lucide-react";
 import { getMe, type AdminData } from "@/src/lib/api/auth";
 import { Toaster } from "@/src/components/ui/toaster";
@@ -142,7 +146,7 @@ export default function DashboardLayout({
                   isActive={pathname.includes("/dashboard/services")}
                 >
                   <a href="/dashboard/services">
-                    <Settings className="mr-2" />
+                    <DollarSignIcon className="mr-2" />
                     <span>Услуги</span>
                   </a>
                 </SidebarMenuButton>
@@ -153,7 +157,8 @@ export default function DashboardLayout({
                   isActive={pathname.includes("/dashboard/categories")}
                 >
                   <a href="/dashboard/categories">
-                    <ImageIcon className="mr-2" />
+                    <SquareMenu className="mr-2" />
+
                     <span>Категории</span>
                   </a>
                 </SidebarMenuButton>
@@ -164,7 +169,7 @@ export default function DashboardLayout({
                   isActive={pathname.includes("/dashboard/about")}
                 >
                   <a href="/dashboard/about">
-                    <ImageIcon className="mr-2" />
+                    <Settings className="mr-2" />
                     <span>О нас</span>
                   </a>
                 </SidebarMenuButton>
