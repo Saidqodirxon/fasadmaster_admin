@@ -96,7 +96,7 @@ export default function DashboardLayout({
           <SidebarHeader className="border-b p-4">
             <a href="/dashboard">
               <Image
-                src="https://admin.artjalyuzi.uz/logo.png"
+                src="https://admin.fasadmaster.uz/logo.png"
                 alt="Логотип"
                 className="object-cover rounded"
                 width={200}
