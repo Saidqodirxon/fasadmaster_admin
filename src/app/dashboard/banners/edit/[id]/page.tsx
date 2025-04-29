@@ -116,10 +116,11 @@ export default function EditBannerPage({ params }: { params: { id: string } }) {
       <Card>
         <CardContent className="pt-6">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
                 <Label htmlFor="name_uz">Название (UZ)</Label>
-                <Input
+                <Textarea
+                  rows={3}
                   id="name_uz"
                   name="name_uz"
                   value={formData.name_uz}
@@ -129,7 +130,8 @@ export default function EditBannerPage({ params }: { params: { id: string } }) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="name_ru">Название (RU)</Label>
-                <Input
+                <Textarea
+                  rows={3}
                   id="name_ru"
                   name="name_ru"
                   value={formData.name_ru}
@@ -139,7 +141,8 @@ export default function EditBannerPage({ params }: { params: { id: string } }) {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="name_en">Название (EN)</Label>
-                <Input
+                <Textarea
+                  rows={3}
                   id="name_en"
                   name="name_en"
                   value={formData.name_en}

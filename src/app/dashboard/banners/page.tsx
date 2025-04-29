@@ -118,9 +118,9 @@ export default function BannersPage() {
             {banners.map((banner: any) => (
               <TableRow key={banner._id}>
                 <TableCell>
-                  {banner.image[0] && banner.image[0].url ? (
+                  {banner.image && banner.image.url ? (
                     <Image
-                      src={banner.image[0].url || "/placeholder.svg"}
+                      src={banner.image.url || "/placeholder.svg"}
                       alt={banner.name_uz}
                       className="w-16 h-16 object-cover rounded"
                       width={100}
