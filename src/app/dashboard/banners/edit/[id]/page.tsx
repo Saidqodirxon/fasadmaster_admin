@@ -28,9 +28,6 @@ export default function EditBannerPage({ params }: { params: { id: string } }) {
     name_uz: "",
     name_ru: "",
     name_en: "",
-    description_uz: "",
-    description_ru: "",
-    description_en: "",
     image: {} as ImageData,
   });
 
@@ -147,42 +144,6 @@ export default function EditBannerPage({ params }: { params: { id: string } }) {
                   name="name_en"
                   value={formData.name_en}
                   onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <Label htmlFor="description_uz">Описание (UZ)</Label>
-                <Textarea
-                  id="description_uz"
-                  name="description_uz"
-                  value={formData.description_uz}
-                  onChange={handleChange}
-                  rows={4}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="description_ru">Описание (RU)</Label>
-                <Textarea
-                  id="description_ru"
-                  name="description_ru"
-                  value={formData.description_ru}
-                  onChange={handleChange}
-                  rows={4}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="description_en">Описание (EN)</Label>
-                <Textarea
-                  id="description_en"
-                  name="description_en"
-                  value={formData.description_en}
-                  onChange={handleChange}
-                  rows={4}
                   required
                 />
               </div>
