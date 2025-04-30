@@ -90,7 +90,7 @@ export default function CreatePortfolioPage() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="is_visible">Показать на сайте</Label>
+              <Label htmlFor="is_visible">показать на главной странице</Label>
               <Input
                 type="checkbox"
                 id="is_visible"
