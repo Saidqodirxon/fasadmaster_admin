@@ -10,6 +10,7 @@ export interface CategoriesData {
   name_uz: string;
   name_ru: string;
   name_en: string;
+  image: ImageData;
 }
 
 export const getCategories = async (id: string): Promise<CategoriesData[]> => {

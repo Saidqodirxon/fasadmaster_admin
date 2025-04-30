@@ -25,7 +25,8 @@ export default function CreateCategoriesPage() {
   const [formData, setFormData] = useState<CategoriesData>({
     name_uz: "",
     name_ru: "",
-    name_en: "", 
+    name_en: "",
+    image: {} as ImageData,
   });
 
   const handleChange = (
@@ -33,6 +34,11 @@ export default function CreateCategoriesPage() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleImageChange = (value: ImageData | ImageData[]) => {
+    const image = Array.isArray(value) ? value[0] : value;
+    setFormData((prev) => ({ ...prev, image }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -102,6 +108,19 @@ export default function CreateCategoriesPage() {
                   required
                 />
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label>Изображение баннера</Label>
+              <FileUpload
+                multiple={false}
+                value={formData.image || []}
+                onChange={handleImageChange}
+              />
+              {formData.image && formData.image?.url && (
+                <p className="text-xs text-green-600 mt-1">
+                  Изображение успешно загружено: {formData.image.id}
+                </p>
+              )}
             </div>
             <div className="flex justify-end">
               <Button type="submit" disabled={loading}>

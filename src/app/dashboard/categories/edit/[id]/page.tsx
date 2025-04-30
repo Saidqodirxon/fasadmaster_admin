@@ -32,7 +32,7 @@ export default function EditCategoriesPage({
     name_uz: "",
     name_ru: "",
     name_en: "",
-    
+    image: {} as ImageData,
   });
 
   useEffect(() => {
@@ -143,6 +143,19 @@ export default function EditCategoriesPage({
                   required
                 />
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label>Изображение баннера</Label>
+              <FileUpload
+                multiple={false}
+                value={formData.image || []}
+                onChange={handleImageChange}
+              />
+              {formData.image && formData.image?.url && (
+                <p className="text-xs text-green-600 mt-1">
+                  Изображение успешно загружено: {formData.image.id}
+                </p>
+              )}
             </div>
 
             <div className="flex justify-end">
