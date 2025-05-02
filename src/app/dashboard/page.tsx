@@ -1,13 +1,15 @@
+// app/admin/dashboard/page.tsx
 "use client";
 
 import { useState, useEffect } from "react";
+import Head from "next/head";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "@/src/components/ui/card";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Eye, EyeOff } from "lucide-react";
 import { getContacts, type ContactData } from "@/src/lib/api/contacts";
 import { useToast } from "@/src/hooks/use-toast";
 import {
@@ -20,11 +22,10 @@ import {
 } from "@/src/components/ui/table";
 import { formatDate } from "@/src/lib/utils";
 import { Button } from "@/src/components/ui/button";
-import { Eye, EyeOff } from "lucide-react";
 
 export default function Dashboard() {
   const [contacts, setContacts] = useState<ContactData[]>([]);
-  const [visibleCount, setVisibleCount] = useState(5); // Start by showing 5 contacts
+  const [visibleCount, setVisibleCount] = useState(5);
   const [loading, setLoading] = useState(true);
   const [visiblePhones, setVisiblePhones] = useState<Record<string, boolean>>(
     {}
@@ -35,8 +36,6 @@ export default function Dashboard() {
     const fetchContacts = async () => {
       try {
         const data = await getContacts();
-
-        // Sort contacts by creation date in descending order (newest first)
         const sortedContacts = Array.isArray(data)
           ? data.sort(
               (a, b) =>
@@ -44,7 +43,6 @@ export default function Dashboard() {
                 new Date(a.createdAt ?? 0).getTime()
             )
           : [];
-
         setContacts(sortedContacts);
       } catch (error: any) {
         toast({
@@ -56,13 +54,10 @@ export default function Dashboard() {
         setLoading(false);
       }
     };
-
     fetchContacts();
   }, [toast]);
 
-  const showMoreContacts = () => {
-    setVisibleCount((prevCount) => prevCount + 5); // Increment the visible count by 5
-  };
+  const showMoreContacts = () => setVisibleCount((prev) => prev + 5);
 
   const togglePhoneVisibility = (id: string) => {
     setVisiblePhones((prev) => ({
@@ -71,9 +66,21 @@ export default function Dashboard() {
     }));
   };
 
+  const maskPhone = (phone: string) => phone.replace(/.(?=.{4})/g, "*");
+
   return (
-    <div className="space-y-6">
-      <div className="mt-8">
+    <>
+      <Head>
+        <title>Admin Dashboard | Fasad Master</title>
+        <meta name="description" content="Просмотр контактов клиентов" />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+        <meta name="referrer" content="no-referrer" />
+      </Head>
+
+      <div className="space-y-6 mt-8">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-lg font-medium">
@@ -103,26 +110,20 @@ export default function Dashboard() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {contacts.slice(0, visibleCount).map((contact, index) => (
-                      <TableRow key={contact._id || index}>
+                    {contacts.slice(0, visibleCount).map((contact) => (
+                      <TableRow key={contact._id}>
                         <TableCell className="font-medium">
                           {contact.name}
                         </TableCell>
                         <TableCell>
-                          {visiblePhones[contact._id ?? ""] ? (
-                            contact.phone
-                          ) : (
-                            <span className="text-muted-foreground">
-                              Скрыто
-                            </span>
-                          )}
+                          {visiblePhones[contact._id ?? ""]
+                            ? contact.phone
+                            : maskPhone(contact.phone)}
                           <button
-                            onClick={() =>
-                              togglePhoneVisibility(contact._id || "")
-                            }
+                            onClick={() => contact._id && togglePhoneVisibility(contact._id)}
                             className="ml-2 text-gray-600 hover:text-primary transition-colors"
                           >
-                            {visiblePhones[contact._id ?? ""] ? (
+                            {contact._id && visiblePhones[contact._id] ? (
                               <EyeOff className="h-4 w-4" />
                             ) : (
                               <Eye className="h-4 w-4" />
@@ -138,6 +139,7 @@ export default function Dashboard() {
                     ))}
                   </TableBody>
                 </Table>
+
                 {visibleCount < contacts.length && (
                   <div className="flex justify-center mt-4">
                     <Button onClick={showMoreContacts}>Показать ещё</Button>
@@ -148,6 +150,6 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </>
   );
 }
