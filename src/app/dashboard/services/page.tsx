@@ -44,10 +44,7 @@ export default function ServicesPage() {
   const [categories, setCategories] = useState<CategoriesData[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
-  const [serviceToDelete, setServiceToDelete] = useState<{
-    id: string;
-    name: string;
-  } | null>(null);
+  const [serviceToDelete, setServiceToDelete] = useState<string | null>(null);
   const [filters, setFilters] = useState<{
     is_visible?: boolean;
     view?: "1" | "2";
@@ -114,10 +111,11 @@ export default function ServicesPage() {
     if (!serviceToDelete) return;
 
     try {
-      await deleteService(serviceToDelete.id);
+      await deleteService(serviceToDelete);
+
       toast({
         title: "Успешно",
-        description: `Услуга "${serviceToDelete.name}" удалена`,
+        description: `Услуга успешно удалена`,
       });
       fetchServices();
     } catch (error: any) {
@@ -132,7 +130,7 @@ export default function ServicesPage() {
     }
   };
   const confirmDelete = (id: string) => {
-    setPortfolioToDelete(id);
+    setServiceToDelete(id);
     setDeleteDialogOpen(true);
   };
 
@@ -354,7 +352,7 @@ export default function ServicesPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Подтвердить удаление</AlertDialogTitle>
             <AlertDialogDescription>
-              Вы уверены, что хотите удалить услугу "{serviceToDelete?.name}"?
+              Вы уверены, что хотите удалить услугу ?
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
