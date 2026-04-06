@@ -12,7 +12,7 @@ import { Card, CardContent } from "@/src/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import { FileUpload } from "@/src/components/file-upload";
 import {
-  getCategories,
+  getCategory,
   updateCategories,
   type CategoriesData,
 } from "@/src/lib/api/categories";
@@ -38,8 +38,7 @@ export default function EditCategoriesPage({
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const data = await getCategories(params.id);
-        const category = Array.isArray(data) ? data[0] : data; // Ensure a single object is selected
+        const category = await getCategory(params.id);
         setFormData(category);
       } catch (error: any) {
         toast({

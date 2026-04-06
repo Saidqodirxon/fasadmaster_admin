@@ -13,7 +13,9 @@ export interface CategoriesData {
   image: ImageData;
 }
 
-export const getCategories = async (id: string): Promise<CategoriesData[]> => {
+export const getCategories = async (
+  _id?: string
+): Promise<CategoriesData[]> => {
   try {
     const response = await api.get("/categories");
     console.log("Get Categories response:", response.data);
