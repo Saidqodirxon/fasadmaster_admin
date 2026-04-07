@@ -8,7 +8,13 @@
       "Bash(yarn upgrade:*)",
       "Bash(npm --version)",
       "Bash(nvm list:*)",
-      "Bash(fnm list:*)"
+      "Bash(fnm list:*)",
+      "Bash(nvm use:*)",
+      "Bash(/c/Users/saidq/AppData/Local/nvm/v22.22.1/node.exe --version)",
+      "Bash(/c/Users/saidq/AppData/Local/nvm/v22.22.1/node.exe /c/Users/saidq/AppData/Local/nvm/v22.22.1/node_modules/yarn/bin/yarn.js --version)",
+      "Bash(/c/Users/saidq/AppData/Local/nvm/v22.22.1/npm.cmd --version)",
+      "Bash(yarn --version)",
+      "Bash(yarn add:*)"
     ]
   }
 }
