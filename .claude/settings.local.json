@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const p = require\\('./node_modules/next/package.json'\\); console.log\\(p.version\\)\")",
+      "Bash(npm view:*)",
+      "Bash(yarn info:*)",
+      "Bash(node -e \"const v=require\\('/dev/stdin'\\); const v15=v.filter\\(x=>x.startsWith\\('15.'\\)\\); console.log\\('Latest 15.x:', v15[v15.length-1]\\); console.log\\('Overall latest:', v[v.length-1]\\);\")",
+      "Bash(yarn upgrade:*)",
+      "Bash(npm --version)",
+      "Bash(nvm list:*)",
+      "Bash(fnm list:*)"
+    ]
+  }
+}
